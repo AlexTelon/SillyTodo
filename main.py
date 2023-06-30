@@ -1,22 +1,13 @@
-todo = []
+T = ['email john', 'buy milk', 'buy eggs']
 import sys
 
-args = ['main.py', 'add', 'buy', 'milk']
-todo.append(' '.join(args[1:]))
-
-# match args[1:]:
-#     case ['add', *items]:
-#         todo.append(' '.join(items))
-#     case 'list':
-#         print('\n'.join(todo))
-#     case _:
-#         print('Unknown command')
-
-
 def save():
-    with open('todo.py', 'w') as f:
-        # replace first line of todo.py
-        f.write('todo = ' + repr(todo) + '\n')
+    content = open('main.py').read().splitlines()[1:]
+    with open('main.py', 'w') as f:
+        f.writelines('\n'.join([f'T = {repr(T)}'] + content))
 
-
-save()
+match sys.argv[1:]:
+    case ['remove', i]:              del T[int(i)-1];save()
+    case ['list']:                   print('\n'.join(f'{i}: {item}'for i, item in enumerate(T, start=1)))
+    case ['add', *items] | [*items]: T.append(' '.join(items));save()
+    case _:                          print('Unknown command')
