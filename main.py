@@ -8,4 +8,4 @@ match sys.argv[1:]:
 
 content = open('main.py').read().splitlines()[1:]
 with open('main.py', 'w') as f:
-    f.writelines('\n'.join([f'T = {repr(T)}'] + content))
+    f.write('\n'.join([f'T = {repr(T)}'] + content))
