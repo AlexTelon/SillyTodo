@@ -6,4 +6,4 @@ match sys.argv[1:]:
     case ['list']:      print('\n'.join(f'{i}: {item}'for i, item in enumerate(T)))
     case [*args]:       T.append(' '.join(args))
 
-open('db.py','w').write(f'T = {repr(T)}')
+open('db.py','w').write(f'T = {T}')
